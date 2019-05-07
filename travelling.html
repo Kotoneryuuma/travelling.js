@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+
+        var tigger = { 
+            // name: "tigger",
+            character: "Tigger",
+            greet: function(){
+                console.log("The wonderful thing about Tiggers is Tiggers are wonderful things!");
+                }
+        }; 
+
+        var pooh = { 
+            // neme: "pooh",
+            character: "Winnie the Pooh",
+            greet: function(){
+                console.log("The wonderful thing about phoos is he hate animals.");
+                }
+        };
+
+
+
+        var piglet = {
+            // name: "piglet",
+            character: "Piglet",
+            greet: function(){
+                console.log("The wonderful thing about piglet is he hate other people.");
+                }
+        };            
+
+        var bees = { 
+            // name: "bees",
+            character: "Bees",
+            greet: function(){
+                console.log("The wonderful thing about bees is he hate other bees.");
+                }
+    
+        };
+
+
+
+        // middle top
+        var robin = { 
+            // name: "robin",
+            character: "Christpoher Robin",
+            greet: function(){
+                console.log("The wonderful thing about robins is he hate bees.");
+                }
+        };
+
+        // left
+        var owl = { 
+            // name: "owl",
+            character: "Owl",
+            greet: function(){
+                console.log("The wonderful thing about owl is his name is short.");
+                }
+        };
+
+
+
+        // right
+        var rabbit = { 
+            // name: "rabbit",
+            character: "Rabbit",
+            greet: function(){
+                console.log("The wonderful thing about rabit is he hate his teeth.");
+                }
+        };
+
+        var gopher = {
+            // name : "gopher",
+            character: "Gophet",
+            greet: function(){
+                console.log("The wonderful thing about gophers is he hate his father.");
+                }
+        };
+
+
+
+        var kanga = { 
+            // name : "kanga",
+            character: "Kanga",
+            greet: function(){
+                console.log("The wonderful thing about kanga is he hate Australia.");
+                }
+        }; 
+
+        var eeyore = { 
+            // name : 'eeyore',
+            character: "Eyeore",
+            greet: function(){
+                console.log("The wonderful thing about eeyore is he hate brash his teeth.");
+                }
+        };
+
+
+
+        var heffalumps = { 
+            // name : 'heffalumps',
+            character: "Heffalumps",
+            greet: function(){
+                console.log("The wonderful thing about heffalumps is he hate his name");
+                }
+        };
+
+
+
+        tigger.north = pooh;
+        pooh.south = tigger;
+
+        pooh.west = piglet;
+        pooh.east = bees;
+
+        pooh.north = robin;
+        piglet.east = pooh;
+
+        piglet.north = owl;
+        bees.west = pooh;
+
+        bees.north = rabbit;
+        owl.south = piglet;
+
+        owl.east = robin;
+        robin.south = pooh;
+
+        robin.west = owl;
+        robin.east = rabbit;
+
+        robin.north = kanga;
+        rabbit.south = bees;
+
+        rabbit.west = robin;
+        rabbit.east = gopher;
+
+        gopher.west = rabbit;
+        kanga.south = robin;
+
+        kanga.north = eeyore;
+        eeyore.south = kanga;
+
+        eeyore.east = heffalumps;
+        heffalumps.west = eeyore;
+
+
+
+        var player = {
+            location: tigger,
+            honey: false,
+        }
+        
+        console.log(player.location)
+
+        function pickUp(){
+            if(player.location == bees){
+                player.honey = true;
+                console.log("Got honey")
+            }
+            else{
+                console.log("Should get honey! Honey is in the bee's place!")
+            }
+        }
+        pickUp()
+
+        // if(player.location.character == "Bees"){
+        //     console.log("now honey");
+        // }
+
+
+        function mission(){
+            var num = Math.floor(Math.random() * 10 + 1);
+            var target;
+            switch(num){
+                case 1:
+                    console.log("Mission: deliver to 'tigger'");
+                    target = tigger;
+                    break;
+                case 2:
+                    console.log("Mission: deliver to 'pooh'");
+                    target = pooh;
+                    break;
+                case 3:
+                    console.log("Mission: deliver to 'piglet'");
+                    target = piglet;
+                    break;
+                case 4:
+                    console.log("Mission: deliver to 'owl'");
+                    target = owl;
+                    break;
+                case 5:
+                    console.log("Mission: deliver to 'rabbit'");
+                    target = rabbit;
+                    break;
+                case 6:
+                    console.log("Mission: deliver to 'gapher'");
+                    target = gopher;
+                    break;
+                case 7:
+                    console.log("Mission: deliver to 'kanga'");
+                    target = kanga;
+                    break;
+                case 8:
+                    console.log("Mission: deliver to 'eeyore'");
+                    target = eeyore;
+                    break;
+                case 9:
+                    console.log("Mission: deliver to 'hellomps'");
+                    target = heffalumps;
+                    break;
+            }
+        return target;
+        }
+        target = mission()
+
+        function drop(){
+            if(player.honey == false){
+                console.log("You don't have honey")
+            }
+            else if(player.location == target){
+                console.log("Yeeeeehhhhhaaaa!!!!  Mission complete!!!!!!!!!!! Hooooooooooohhhhhhhhh!!!!!!!!");
+                player.honey = false;
+            }
+            else{
+                console.log("False, try again")
+            }
+        }
+        drop()
+            
+
+        
+
+        document.onkeydown = function(e){
+
+            var location_now = player.location;
+            if(e.keyCode == 37){
+                player.location = player.location.west;
+                // console.log('move left')
+                if( player.location == undefined){
+                    console.log('You must not go that way!')
+                    player.location = location_now;
+                }
+                else{
+                    const now = player.location.character;
+                    console.log(`You are now at ${now}.`);
+                    console.log("move ('left')")
+                }
+                // player.location.greet();
+            }
+            else if (e.keyCode == 39){
+                // Right
+                player.location = player.location.east;
+                // console.log(player.location)
+                if( player.location == undefined){
+                    console.log('You must not go that way!')
+                    player.location = location_now;
+                }
+                else{
+                    console.log("move ('right')")
+                    const now = player.location.character;
+                    console.log(`You are now at ${now}.`);
+                }
+                // player.location.greet();
+            }
+
+
+            else if (e.keyCode == 38){
+                // Top
+                player.location = player.location.north;
+                // console.log(player.location);
+                if( player.location == undefined){
+                    console.log('You must not go that way!')
+                    player.location = location_now;
+                }
+                else{
+                    console.log("move ('top')")
+                    var now = player.location.character;
+                    console.log(`You are now at ${now}.`);
+                }
+                // player.location.greet();
+            }
+            else if (e.keyCode == 40){
+                // Bottom
+                player.location = player.location.south;
+                // console.log(player.location)
+                if( player.location == undefined){
+                    console.log('You must not go that way!')
+                    player.location = location_now;
+                }
+                else{
+                    console.log("move ('buttom')");
+                    const now = player.location.character;
+                    console.log(`You are now at ${now}.`);
+                }
+                // player.location.greet();
+            }
+            if (player.location.character == "Bees"){
+                console.log(pickUp());
+            }
+            if(player.location == target){
+                console.log(drop());
+            }
+        }
+    
+    </script>
+    
+</body>
+</html>
